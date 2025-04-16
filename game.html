@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>What Music Genre Should You Listen To?</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    .quiz-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+
+    .question {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin: 0.5rem 0;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .result {
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quiz-container">
+    <h1>🎵 What Music Genre Should You Listen To?</h1>
+
+    <div class="question">
+      <p>1. What's your current mood?</p>
+      <label><input type="radio" name="mood" value="happy"> Happy</label>
+      <label><input type="radio" name="mood" value="sad"> Sad</label>
+      <label><input type="radio" name="mood" value="energetic"> Energetic</label>
+      <label><input type="radio" name="mood" value="chill"> Chill</label>
+    </div>
+
+    <div class="question">
+      <p>2. What kind of vibe do you want?</p>
+      <label><input type="radio" name="vibe" value="dance"> Something to dance to</label>
+      <label><input type="radio" name="vibe" value="think"> Something deep & thoughtful</label>
+      <label><input type="radio" name="vibe" value="focus"> Background music for focus</label>
+      <label><input type="radio" name="vibe" value="rage"> Let out some rage</label>
+    </div>
+
+    <button onclick="getGenre()">Find My Genre</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+  function getGenre() {
+    const mood = document.querySelector('input[name="mood"]:checked');
+    const vibe = document.querySelector('input[name="vibe"]:checked');
+    const resultEl = document.getElementById('result');
+
+    if (!mood || !vibe) {
+      resultEl.textContent = "Please answer both questions!";
+      return;
+    }
+
+    let genre = "Pop";
+
+    if (mood.value === "happy" && vibe.value === "dance") genre = "Pop or Dance";
+    else if (mood.value === "sad" && vibe.value === "think") genre = "Indie or Acoustic";
+    else if (mood.value === "energetic" && vibe.value === "rage") genre = "Rock or Metal";
+    else if (mood.value === "chill" && vibe.value === "focus") genre = "Lo-fi or Chillhop";
+    else if (mood.value === "happy" && vibe.value === "focus") genre = "Jazz or Funk";
+    else if (vibe.value === "think") genre = "Alternative or Ambient";
+
+    resultEl.textContent = "🎧 You should listen to: " + genre + " music!";
+  }
+
+  function resetQuiz() {
+    const radios = document.querySelectorAll('input[type="radio"]');
+    radios.forEach(r => r.checked = false);
+
+    const resultEl = document.getElementById('result');
+    resultEl.textContent = '';
+  }
+  </script>
+  <button onclick="resetQuiz()" style="background-color: #888; margin-left: 10px;">Reset Quiz</button>
+
+
+</body>
+</html>
